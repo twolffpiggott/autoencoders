@@ -1,7 +1,7 @@
 # autoencoders
 ## Usage for Keras Variational autoencoder
 
-{% highlight python %}
+```python
 import autoencoders
 import helpers
 # read in MNIST data
@@ -12,6 +12,6 @@ vae = autoencoders.VariationalAutoencoder(batch_size=100, original_dim=784, late
 vae.train(x_train, x_test, 10)
 # plot encoded scatterplot and manifold visualization
 vae.report(x_test, y_test)
-{% endhighlight %}
+```
 
 
