@@ -1,14 +1,22 @@
 import numpy as np
 from scipy.stats import norm
 import matplotlib.pyplot as plt
+from datetime import datetime
 import helpers
+import multivac as m
 
-def plot_scatter(encoded, labels):
+def plot_scatter(encoded, labels=None,proj='autoencoders', gname='latent_space_scatter_2d'):
     plt.clf(); plt.cla()
     plt.figure()
-    plt.scatter(encoded[:,0], encoded[:,1], c=labels, cmap='rainbow')
-    plt.colorbar()
-    helpers.multivac_save_graph('latent_space_scatter_2d')
+    if labels is not None:
+        plt.scatter(encoded[:,0], encoded[:,1], c=labels, cmap='rainbow')
+        plt.colorbar()
+        helpers.multivac_save_graph('latent_space_scatter_2d_labelled')
+        m.persist.graph.save_graph(proj, title=gname, date=datetime.now(), verbose=False)
+    else:
+        plt.scatter(encoded[:,0], encoded[:,1])
+        m.persist.graph.save_graph(proj, title=gname, date=datetime.now(), verbose=False)
+        
 
 def plot_manifold(generator, n=15, digit_size=28):
     figure = np.zeros((digit_size * n, digit_size * n))
